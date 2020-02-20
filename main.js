@@ -1,11 +1,11 @@
-const inquirer = require('inquirer')
-const async = require('async')
-require('events').EventEmitter.prototype._maxListeners = 200
+const inquirer = require('inquirer');
+const async = require('async');
+require('events').EventEmitter.prototype._maxListeners = 200;
 
-const Game = require('./Game.js')
-const TourDeMonde = require('./TourDeMonde')
-const Le301 = require('./Le301')
-const Player = require('./Player')
+const Game = require('./Game.js');
+const TourDeMonde = require('./TourDeMonde');
+const Le301 = require('./Le301');
+const Player = require('./Player');
 
 
 class Cricket extends Game {
@@ -21,9 +21,9 @@ function shuffleArray(array) {
     }
     return array
 }
-var game = new Game()
+var game = new Game();
 // On demande le mode de jeu et le nombre de joueurs
-let promise = game.askGameParams()
+let promise = game.askGameParams();
 promise.then(() => {
     if(game.mode === 'Le tour du Monde'){
         game = new TourDeMonde(game.nbPlayers)
@@ -37,7 +37,7 @@ promise.then(() => {
 }).then(() => {
 
     // on mélange l'array pour obtenir un ordre alétoire
-    shuffleArray(game.players)
+    shuffleArray(game.players);
     
     // On lance le jeu
     return game.playGame()
@@ -46,4 +46,4 @@ promise.then(() => {
 }).
 then(() => {
     console.table(game.winners, ["name"])
-})
+});
