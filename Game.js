@@ -16,8 +16,11 @@ module.exports = class Game {
 
     // Fonction récursive qui retourne le joueur suivant
     getNextPlayer(id){
-      if(id > this.players.length-1 || this.players[id] === null)
+      if(this.players[id] === undefined)
       {
+        if(this.players.length === this.winners.length){
+            return this.gameWon = true;
+        }
         this.tour++;
         this.showScoreTable();
         return this.getNextPlayer(0);

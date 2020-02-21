@@ -1,4 +1,4 @@
-let Game = require('./Game.js');
+const Game = require('../../Game.js');
 const inquirer = require('inquirer');
 const async = require('async');
 
@@ -44,10 +44,9 @@ module.exports = class TourDeMonde extends Game {
                     game.winners.push(player);
                     player.inGame = false;
                     player.shot = 1;
-                    player.max = 0;
+                    console.log("\nBravo, "+player.name+" a terminé le jeu!\n");
                     player = game.getNextPlayer(id+1);
                     id = game.players.indexOf(player);
-                    console.log("\nBravo, "+player.name+" a terminé le jeu!\n");
                     // On vérifie si le jeu est terminé
                     if(game.winners.length === game.players.length){
                         game.gameWon = true;

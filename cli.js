@@ -3,14 +3,9 @@ const async = require('async');
 require('events').EventEmitter.prototype._maxListeners = 200;
 
 const Game = require('./Game.js');
-const TourDeMonde = require('./TourDeMonde');
-const Le301 = require('./Le301');
+const TourDeMonde = require('./engine/gamemodes/around-the-world');
+const Le301 = require('./engine/gamemodes/301');
 const Player = require('./Player');
-
-
-class Cricket extends Game {
-}
-
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {

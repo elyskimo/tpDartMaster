@@ -1,4 +1,4 @@
-let Game = require('./Game.js');
+const Game = require('../../Game.js');
 const inquirer = require('inquirer');
 const async = require('async');
 
@@ -23,7 +23,7 @@ module.exports = class Le301 extends Game {
     // et ensuite gere le score et le passage des joueurs
     async askScore(game, player, id) {
         if(player.shot === 1){
-            console.log("A toi de jouer "+player.name);
+            console.log("\nA toi de jouer "+player.name);
             console.log("Ton score: "+player.max);
         }
         let questScore = [];
