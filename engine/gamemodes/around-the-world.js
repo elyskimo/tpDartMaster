@@ -1,4 +1,4 @@
-const Game = require('../../Game.js');
+const Game = require('../classes/Game.js');
 const inquirer = require('inquirer');
 const async = require('async');
 
@@ -13,7 +13,7 @@ module.exports = class TourDeMonde extends Game {
         }
         return await this.askScore(this, this.players[0], 0);
     }
-    
+
     // Fonction récursive qui demande le sécteur touché
     // et ensuite gere le score et le passage des joueurs
     async askScore(game, player, id) {
@@ -35,7 +35,7 @@ module.exports = class TourDeMonde extends Game {
                 }
             });
             await inquirer.prompt(questScore).then((answer) => {
-                if(game.gameWon){
+                if(game.gameOver){
                     return Promise.reject("\n******************** JEU TERMINÉ ********************\n")
                 }
                 var score = Object.values(answer);
@@ -49,7 +49,7 @@ module.exports = class TourDeMonde extends Game {
                     id = game.players.indexOf(player);
                     // On vérifie si le jeu est terminé
                     if(game.winners.length === game.players.length){
-                        game.gameWon = true;
+                        game.gameOver = true;
                         return Promise.reject("\n******************** JEU TERMINÉ ********************\n")
                     }
                     return this.askScore(game, player, id);

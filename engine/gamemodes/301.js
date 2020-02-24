@@ -1,4 +1,4 @@
-const Game = require('../../Game.js');
+const Game = require('../classes/Game.js');
 const inquirer = require('inquirer');
 const async = require('async');
 
@@ -76,7 +76,7 @@ module.exports = class Le301 extends Game {
 
                 // On vérifie si le jeu est terminé
                 if(game.winners.length === game.players.length){
-                  game.gameWon = true;
+                  game.gameOver = true;
                   return Promise.reject("\n******************** JEU TERMINÉ ********************\n")
                 }
                 player = game.getNextPlayer(id+1);
@@ -88,7 +88,7 @@ module.exports = class Le301 extends Game {
 
         // On traite les tirs et les tours des joueurs
         // Si le joueur a tiré 3 fois on calcule son score et on passe à l'autre joueur
-        if(player.shot === 3 && !game.gameWon){
+        if(player.shot === 3 && !game.gameOver){
 
             // On vérifie si le joueur a gagné (vérifier si les derniers deux tirs sont les doubles)
             // On vérifie que son score tiré ne dépasse pas 0
@@ -107,7 +107,7 @@ module.exports = class Le301 extends Game {
 
                     // On vérifie si le jeu est terminé
                     if(game.winners.length === game.players.length){
-                      game.gameWon = true;
+                      game.gameOver = true;
                       return Promise.reject("\n******************** JEU TERMINÉ ********************\n")
                     }
 

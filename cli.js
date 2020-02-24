@@ -2,10 +2,10 @@ const inquirer = require('inquirer');
 const async = require('async');
 require('events').EventEmitter.prototype._maxListeners = 200;
 
-const Game = require('./Game.js');
+const Game = require('./engine/classes/Game.js');
 const TourDeMonde = require('./engine/gamemodes/around-the-world');
 const Le301 = require('./engine/gamemodes/301');
-const Player = require('./Player');
+const Player = require('./engine/classes/Player');
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -33,7 +33,7 @@ promise.then(() => {
 
     // on mélange l'array pour obtenir un ordre alétoire
     shuffleArray(game.players);
-    
+
     // On lance le jeu
     return game.playGame()
 }).catch((err) => {

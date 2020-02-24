@@ -1,4 +1,4 @@
-const Game = require('../../Game.js');
+const Game = require('../classes/Game.js');
 // const inquirer = require('inquirer');
 // const async = require('async');
 

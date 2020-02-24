@@ -4,12 +4,12 @@ const Player = require('./Player');
 
 module.exports = class Game {
     constructor(nbPlayers, mode) {
-        this.nbPlayers = nbPlayers;
-        this.mode = mode;
+        this.nbPlayers = nbPlayers; // nombre de joueurs
+        this.mode = mode; // mode de jeu
         this.players = []; // array contenant les instances des joueurs
-        this.playerId = 0; // joueur courant currentPlayerId
+        this.currentPlayerId = 0; // joueur courant
         this.tour = 0; // +1 quand tous les joueurs ont tiré 3 fois
-        this.gameWon = false; // true si le jeu est gagné
+        this.gameOver = false; // true si le jeu est gagné
         this.winner = ""; // contiendra le nom du joueur vainqueur
         this.winners = [];
     }
@@ -19,7 +19,7 @@ module.exports = class Game {
       if(this.players[id] === undefined)
       {
         if(this.players.length === this.winners.length){
-            return this.gameWon = true;
+            return this.gameOver = true;
         }
         this.tour++;
         this.showScoreTable();
@@ -29,7 +29,7 @@ module.exports = class Game {
         return this.getNextPlayer(id+1);
       }
       if(this.players.length === this.winners.length){
-        this.gameWon = true;
+        this.gameOver = true;
         return null;
       }
 
@@ -81,7 +81,7 @@ module.exports = class Game {
     }
     // Fonction qui affiche le tableaux contenant les noms des joueurs et leur score maximal
     showScoreTable(){
-        console.log("********* "+this.mode+" - tour "+this.tour+" *********");
+        console.log("\n********* "+this.mode+" - tour "+this.tour+" *********");
         console.table(this.players, ["name","max"]);
     }
 };
