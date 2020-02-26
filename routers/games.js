@@ -141,9 +141,20 @@ router.patch('/:id', async (req, res, next) => {
 
 });
 
-router.delete('/:id', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+router.delete('/:id', async(req, res, next) => {
+  // Permet de supprimer une partie
+    await Game.findByIdAndDelete({_id: req.params.id}).then(() => {
+      return res.format({
+        html: () => {
+          res.redirect('/games/');
+        },
+        json: () => {
+          res.json({
+            code: 204
+          });
+        }
+      });
+    });
 });
 
 router.get('/', async (req, res, next) => {
@@ -166,12 +177,10 @@ router.get('/', async (req, res, next) => {
       var crois = -1;
     }
     var filter = {};
-    console.log(req.body);
     if(req.body.f){
-      console.log("f.status");
       filter.status = req.body.f.status;
     }
-    console.log(filter, "sort: "+crois, "limit: "+limit, "sort:"+sort);
+
     let games = await Game.find(filter)
                         .limit(limit ? parseInt(limit) : 10)
                         .sort({ sort: crois})

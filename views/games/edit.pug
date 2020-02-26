@@ -1,3 +1,6 @@
+meta(charset="UTF-8")
+meta(name='viewport', content='width=device-width, initial-scale=1.0')
+link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous')
 block content
   .main.container
     .row
@@ -30,19 +33,16 @@ block content
           //input#status.form-control(type='text', placeholder='status' name='status' value= status)
           input.form-control(type='hidden', name='statusselect')
           select#status.select.form-control.input-lg(name='statusselect')
-            each opt in statusOpt
-              if(opt === status)
-                option(value= status, selected)= status
-              else
+            if !status
+              each opt in statusOpt
                 option(value= opt)= opt
-          //  if !status
-          //    each opt in statusOpt
-          //      option(value= opt)= opt
-          //  else
-          //    each opt in statusOpt
-          //      if (opt === status)
-          //        option(value= status, selected)= status
-          //      else
-          //        option(value= opt)= opt
+            else
+              each opt in statusOpt
+                if (opt === status)
+                  option(value= status, selected)= status
+                else
+                  option(value= opt)= opt
         input.form-control(type='hidden', name='_method', value='PATCH')
         button.btn.btn-primary(type='submit') Send
+script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')
