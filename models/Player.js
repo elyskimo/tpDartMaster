@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-import { isEmail } from 'validator';
+const validator = require('validator');
 
 const playerSchema = new mongoose.Schema({
   name: {
@@ -10,15 +10,17 @@ const playerSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    validate: [ isEmail, 'invalid email' ]
+    validate: (v) => {validator.isEmail(v)}
   },
   gameWin: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   gameLost: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   createdAt: {
     type: Date,

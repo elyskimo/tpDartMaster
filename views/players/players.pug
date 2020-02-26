@@ -1,0 +1,35 @@
+// un tableau qui liste les joueurs avec un bouton
+// pour accéder / supprimer le joueurs
+
+html
+  head
+    block head
+  body
+    h1 Players
+    table.table.table-striped
+      tr
+        th ID
+        th Name
+        th Email
+        th Wins
+        th Losses
+        th Created
+        th Action
+
+      each p in players
+        tr
+          td= p._id
+          td= p.name
+          td= p.email
+          td= p.gameWin
+          td= p.gameLost
+          td= p.createdAt
+          td
+            button(type='button' value="p._id" onclick="edit(\""+p._id+"\");") Edit
+            form(method='POST' action='/players/'+p._id+'?_method=DELETE')
+              input.form-control(type='hidden', name='_method', value='DELETE')
+              button(type='submit' value="p._id" onclick="supp(\""+p._id+"\");") Delete
+  script.
+    function edit(id) {
+      window.location.href = 'http://localhost:3000/players/'+id+'/edit';
+    };

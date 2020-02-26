@@ -1,0 +1,37 @@
+html
+  head
+    block head
+  body
+    h1 Games
+    table.table.table-striped
+      tr
+        th ID
+        th Mode
+        th Name
+        th Current Player Id
+        th Status
+        th Created
+        th Action
+
+      each g in games
+        tr
+          td= g._id
+          td= g.mode
+          td= g.name
+          td= g.currentPlayerId
+          td= g.status
+          td= g.createdAt
+          td
+            button(type='button' value="g._id" onclick="edit(\""+g._id+"\");") Edit
+            form(method='POST' action='/games/'+g._id+'?_method=DELETE')
+              input.form-control(type='hidden', name='_method', value='DELETE')
+              button(type='submit' value="g._id" onclick="supp(\""+g._id+"\");") Delete
+
+    button(type='button' value="getPlayers" onclick="getPlayers()") Show players
+    script.
+      function getPlayers(){
+        window.location.href = 'http://localhost:3000/players/';
+      };
+      function edit(id){
+        window.location.href = 'http://localhost:3000/games/'+id+'/edit';
+      };

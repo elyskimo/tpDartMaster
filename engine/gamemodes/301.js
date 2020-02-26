@@ -11,7 +11,7 @@ module.exports = class Le301 extends Game {
     async playGame(){
         // On set le score de tous les joueurs à 301
         for (var player of this.players){
-            player.max = 100;
+            player.max = 301;
         }
         if(this.tour === 0){
             console.log("C'est parti!");

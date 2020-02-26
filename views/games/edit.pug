@@ -1,0 +1,48 @@
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+      h1.display-4.m-b-2 EDIT GAME
+
+      form(method='POST' action='/games/'+id+'?_method='+method)
+        div.form-group
+          label(for='mode') Mode:
+          //input#mode.form-control(type='text', placeholder='mode' name='mode' value= mode)
+          input.form-control(type='hidden', name='modeselect')
+          select#mode.select.form-control.input-lg(name='modeselect')
+            if !mode
+              each opt in modeOpt
+                option(value= opt)= opt
+            else
+              each opt in modeOpt
+                if (opt === mode)
+                  option(value='myselectedvalue', selected)= mode
+                else
+                  option(value='myselectedvalue')= opt
+        div.form-group
+          label(for='name') Name:
+          input#name.form-control(type='text', placeholder='name' name='name' value= name)
+        div.form-group
+          label(for='currentPlayerId') Current Player ID:
+          input#currentPlayerId.form-control(type='text', placeholder='player ID' name='currentPlayerId' value= currentPlayerId)
+        div.form-group
+          label(for='status') Status:
+          //input#status.form-control(type='text', placeholder='status' name='status' value= status)
+          input.form-control(type='hidden', name='statusselect')
+          select#status.select.form-control.input-lg(name='statusselect')
+            each opt in statusOpt
+              if(opt === status)
+                option(value= status, selected)= status
+              else
+                option(value= opt)= opt
+          //  if !status
+          //    each opt in statusOpt
+          //      option(value= opt)= opt
+          //  else
+          //    each opt in statusOpt
+          //      if (opt === status)
+          //        option(value= status, selected)= status
+          //      else
+          //        option(value= opt)= opt
+        input.form-control(type='hidden', name='_method', value='PATCH')
+        button.btn.btn-primary(type='submit') Send

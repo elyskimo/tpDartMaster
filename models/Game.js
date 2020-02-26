@@ -13,8 +13,7 @@ const gameSchema = new mongoose.Schema({
   },
   currentPlayerId: {
     type: String,
-    required: true,
-    min: 6
+    required: true
   },
   status: {
     type: String,
@@ -23,7 +22,8 @@ const gameSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
+    required: true
   }
 }, { collection: 'games' });
 

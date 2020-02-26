@@ -1,11 +1,12 @@
 // le point d'entrée du serveur web
 const express = require('express'),
       app = express(),
-      PORT = process.env.PORT,
+      PORT = 3000,
       bodyParser = require('body-parser'),
       playersRoutes = require('./routers/players'),
       gamesRoutes = require('./routers/games'),
       dotenv = require('dotenv'),
+      methodOverride = require('method-override'),
       mongoose = require('mongoose');
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 
 app.use('/players', playersRoutes);
 app.use('/games', gamesRoutes);
