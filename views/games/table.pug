@@ -5,7 +5,8 @@ html
     link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous')
     block head
   body
-    h1 Games
+    center
+      h1 GAMES
     table.table.table-striped
       tr
         th ID
@@ -25,12 +26,12 @@ html
           td= g.status
           td= g.createdAt
           td
-            button(type='button' class="btn btn-primary" value="g._id" onclick="edit(\""+g._id+"\");") Edit
+            button(type='button' class="btn btn-primary" style="margin-bottom:10px" value="g._id" onclick="edit(\""+g._id+"\");") Edit
             form(method='POST' action='/games/'+g._id+'?_method=DELETE')
               input.form-control(type='hidden', name='_method', value='DELETE')
-              button(type='submit' class="btn btn-primary" value="g._id" onclick="supp(\""+g._id+"\");") Delete
+              button(type='submit' class="btn btn-danger" value="g._id" onclick="supp(\""+g._id+"\");") Delete
 
-    button(type='button' value="getPlayers" onclick="getPlayers()") Show players
+    button(type='button' class="btn btn-primary btn-lg" style="margin-bottom:50px;margin-left:10px" value="getPlayers" onclick="getPlayers()") Show players
     script(src='https://code.jquery.com/jquery-3.2.1.min.js'
            integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
            crossorigin='anonymous')

@@ -5,14 +5,17 @@ block content
   .main.container
     .row
       .col-md-6.col-md-offset-3
-      h1.display-4.m-b-2 EDIT GAME
+      if !mode
+        h1.display-4.m-b-2 ADD NEW GAME
+      else
+        h1.display-4.m-b-2 EDIT GAME
 
       form(method='POST' action='/games/'+id+'?_method='+method)
         div.form-group
           label(for='mode') Mode:
           //input#mode.form-control(type='text', placeholder='mode' name='mode' value= mode)
           input.form-control(type='hidden', name='modeselect')
-          select#mode.select.form-control.input-lg(name='modeselect')
+          select#mode.select.form-control(name='modeselect')
             if !mode
               each opt in modeOpt
                 option(value= opt)= opt
@@ -32,7 +35,7 @@ block content
           label(for='status') Status:
           //input#status.form-control(type='text', placeholder='status' name='status' value= status)
           input.form-control(type='hidden', name='statusselect')
-          select#status.select.form-control.input-lg(name='statusselect')
+          select#status.select.form-control(name='statusselect')
             if !status
               each opt in statusOpt
                 option(value= opt)= opt

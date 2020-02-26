@@ -5,18 +5,20 @@ block content
   .main.container
     .row
       .col-md-6.col-md-offset-3
+      if !mode
+        h1.display-4.m-b-2 ADD NEW PLAYER
+      else
+        h1.display-4.m-b-2 EDIT PLAYER
 
-          h1.display-4.m-b-2 EDIT PLAYER
+      form(method='POST' action='/players/'+id+'?_method='+method)
 
-          form(method='POST' action='/players/'+id+'?_method='+method)
-
-            div.form-group
-              label(for='name') Name:
-              input#name.form-control(type='text', placeholder='username' name='name' value= name)
-            div.form-group
-              label(for='email') Email:
-              input#email.form-control(type='email', placeholder='name@email.com' name='email' value= email)
-              input.form-control(type='hidden', name='_method', value='PATCH')
-            button.btn.btn-primary(type='submit') Send
+        div.form-group
+          label(for='name') Name:
+          input#name.form-control(type='text', placeholder='username' name='name' value= name)
+        div.form-group
+          label(for='email') Email:
+          input#email.form-control(type='email', placeholder='name@email.com' name='email' value= email)
+          input.form-control(type='hidden', name='_method', value='PATCH')
+        button.btn.btn-primary(type='submit') Send
 script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
 script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')

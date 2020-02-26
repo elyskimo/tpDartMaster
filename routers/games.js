@@ -3,7 +3,6 @@ const Game = require('../models/Game');
 require('async');
 
 router.get('/new', (req, res, next) => {
-  console.log("NEW ici");
   return res.format({
     html: () => {
       res.render('games/edit.pug',{
@@ -15,8 +14,8 @@ router.get('/new', (req, res, next) => {
     },
     json: () => {
       res.json({error: {
-        type: "406 NOT_API_AVAILABLE",
-        message: ""
+        type: "406",
+        message: "NOT_API_AVAILABLE"
         }
       });
     }
@@ -26,7 +25,6 @@ router.get('/new', (req, res, next) => {
 router.get('/:id/edit', async(req, res, next) => {
   // afficher un form de création de game (meme view que pour la création)
   let player = await Game.findOne({_id: req.params.id}).then((g) => {
-    // res.send("EDIT "+req.params.id);
     res.format({
       html: () => {
         res.render('games/edit.pug',{
@@ -51,28 +49,23 @@ router.get('/:id/edit', async(req, res, next) => {
 });
 
 router.get('/:id/players', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+    res.send("GET /:id/players");
 });
 
 router.post('/:id/players', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+    res.send("POST /:id/players");
 });
 
 router.delete('/:id/players', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+    res.send("DELETE /:id/players");
 });
 
 router.delete('/:id/shots/previous', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+    res.send("DELETE /:id/shots/previous");
 });
 
 router.post('/:id/shots', (req, res, next) => {
-    console.log('Correspond à /games');
-    res.send("GAMES");
+    res.send("POST /:id/shots");
 });
 
 router.get('/:id', async (req, res, next) => {
@@ -80,7 +73,6 @@ router.get('/:id', async (req, res, next) => {
     console.log(g);
     res.format({
       html: () => {
-        // res.redirect('/players/'+p._id+'/edit');
         res.render('games/edit.pug',{
           id: req.params.id,
           mode: g.mode,
@@ -100,8 +92,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.patch('/:id', async (req, res, next) => {
-  console.log("PATCH ici");
-  // permet d'editer un jeu
+  // permet d'editer une partie
   let notEditedGame = await Game.findOne({_id: req.params.id}).then(async(g) => {
     if(p.status === "started"){
       let err = new Error('410 GAME_NOT_EDITABLE');
@@ -110,7 +101,6 @@ router.patch('/:id', async (req, res, next) => {
       if((!req.body.name || req.body.name === '') &&
          (!req.body.mode || req.body.mode === ''))
       {
-        console.log("no name, no mode");
         let err = new Error('422 GAME_NOT_STARTABLE');
         return res.send(err);
       }else{
@@ -133,7 +123,6 @@ router.patch('/:id', async (req, res, next) => {
                   }
                 })
               }).catch(next);
-
       }
     }
   });
